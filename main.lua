@@ -21,10 +21,10 @@ local criterion = nn.CrossEntropyCriterion()
 local lr = config.lr
 local epochs = config.epochs
 local dataset_size = 1360
-local data_dim
+local data_dim = 607500
 
 local all_images = torch.Tensor(dataset_size, data_dim)
-local all_labels = torch.Tensor(1, data_dim)
+local all_labels = torch.Tensor(1, dataset_size)
 
 local ndx = 1
 for dir = 0, 16 do
@@ -32,6 +32,7 @@ for dir = 0, 16 do
 	f = io.popen('ls ' .. label_dir)
     for file in f:lines() do
 		img_filename = label_dir .. '/' .. file
+		print(img_filename .. " being read")
         img = image.load(img_filename)
         all_images[ndx] = img:view(img:nElement())
 		all_labels[{{}, ndx}] = dir
@@ -39,9 +40,6 @@ for dir = 0, 16 do
     end
 end
 
-
-print(all_labels)
-os.exit()
 
 local labels_shuffle = torch.randperm(dataset_size)
 
