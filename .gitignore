@@ -139,5 +139,5 @@ model/history/1/config2_more_epochs
 
 ## Other stuff
 ./data/
-./debugger
+./debugger.lua
 ./17flowers.tgz

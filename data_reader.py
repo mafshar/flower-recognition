@@ -1,8 +1,8 @@
 import glob
 import os
 import sys
+import cv2
 from shutil import copyfile
-import scipy.io as sio
 
 def generate_data_split(input_path, output_path):
     for root, dirs, files in os.walk(input_path):
@@ -23,3 +23,13 @@ def generate_data_split(input_path, output_path):
                 dst_filepath = os.path.join(label_dir, file)
                 copyfile(src_filepath, dst_filepath)
                 count += 1
+
+def scale_data(path, xdim, ydim):
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if file.endswith('.jpg'):
+                input_img_path = os.path.join(root, file)
+                print input_img_path
+                img = cv2.imread(input_img_path)
+                scaled_img = cv2.resize(img, (xdim, ydim))
+                cv2.imwrite(input_img_path, scaled_img)
