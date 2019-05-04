@@ -1,5 +1,5 @@
 # flower classification
-
+## this repo has been deprecated - it was built in Lua Torch, which is mostly obsolete
 NOTE:
 Current model runs on the default 17 class subset of original dataset
 
